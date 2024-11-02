@@ -121,3 +121,35 @@ function details(id){
         details.appendChild(detailsDiv)
     })
 }
+
+document.getElementById('searchButton').addEventListener('click', async () => {
+    const mealSearch = document.getElementById('mealSearch').value;
+    const response = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${mealSearch}`);
+    const data = await response.json();
+    
+    displayMeals(data.meals);
+});
+
+function displayMeals(meals) {
+    const mealResults = document.getElementById('mealResults');
+    mealResults.innerHTML = ''; // Clear previous results
+    
+    if (!meals) {
+        mealResults.innerHTML = '<p>No meals found. Please try again.</p>';
+        return;
+    }
+
+    meals.forEach(meal => {
+        const mealDiv = document.createElement('div');
+        mealDiv.className = 'meal-item mb-3';
+        mealDiv.innerHTML = `
+            <h5>${meal.strMeal}</h5>
+            <img src="${meal.strMealThumb}" alt="${meal.strMeal}" class="img-fluid">
+            <p>Category: ${meal.strCategory}</p>
+            <p>Area: ${meal.strArea}</p>
+            <a href="${meal.strYoutube}" target="_blank" class="btn btn-info">Watch Recipe</a>
+        `;
+        mealResults.appendChild(mealDiv);
+    });
+}
+
