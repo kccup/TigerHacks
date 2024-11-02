@@ -30,3 +30,16 @@ button:hover {
     background-color: #ff4500;
     transform: scale(1.1);
 }
+
+.btn{
+  padding:
+  cursor: pointer;
+  border: 2px solid #0f172a;
+  box-shadow: 2px 2px 00 white, 4px 4px 00 #0f172a;
+  transistion-duration: 200ms;  
+}
+
+.btn:hover {
+    box-shadow: 3px 3px white, 6px 0 0 #0f172a;
+    transform: translate(-2px, -2px);
+}
