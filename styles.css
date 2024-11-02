@@ -27,14 +27,17 @@ body {
     100% { background-position: 100% 100%; }
 }
 
-h1 {
+.rainbow-text {
     font-size: 3em;
     margin-bottom: 20px;
+    background: linear-gradient(45deg, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #9400d3);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 /* Button styles */
-button {
-    background-color: #ff6347;
+.btn {
+    background-color: rgba(255, 255, 255, 0.2);
     border: none;
     color: white;
     padding: 15px 32px;
@@ -45,15 +48,35 @@ button {
     margin: 4px 2px;
     cursor: pointer;
     transition: background-color 0.3s, transform 0.3s;
+    border-radius: 5px;
 }
 
-button:hover {
-    background-color: #ff4500;
+.rainbow-btn {
+    background: linear-gradient(45deg, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #9400d3);
+    background-size: 200% 200%;
+    animation: rainbow-btn 4s linear infinite;
+}
+
+@keyframes rainbow-btn {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 100% 50%; }
+}
+
+.btn:hover {
     transform: scale(1.1);
 }
 
-/* Additional button styles */
-.btn {
-    padding: 10px; /* Specify padding */
-    cursor: pointer;
-    border: 2px solid #0f172a;
+/* Additional button hover effects */
+.btn:hover {
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
+/* Pixelated grid effect */
+.pixel {
+    width: 10px; /* Width of each pixel */
+    height: 10px; /* Height of each pixel */
+    background: rgba(255, 255, 255, 0.2); /* Optional overlay for a pixelated look */
+    box-shadow: 0 0 0 1px #fff; /* Outline to enhance pixel effect */
+    display: inline-block;
+}
+
