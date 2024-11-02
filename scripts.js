@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
         vegetable.src = `images/${vegetables[Math.floor(Math.random() * vegetables.length)]}`;
         vegetable.classList.add('vegetable');
         vegetable.style.left = `${Math.random() * 100}vw`;
-        vegetable.style.animationDuration = `${Math.random() * 5 + 5}s`; // Random duration between 5 and 10 seconds
+        vegetable.style.animationDuration = `${Math.random() * 9 + 7}s`; // Random duration between 5 and 10 seconds
         container.appendChild(vegetable);
 
         // Remove the vegetable after the animation ends
@@ -24,6 +24,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Create a new vegetable every 500ms
-    setInterval(createVegetable, 500);
+    // Create a new vegetable every ___ms
+    setInterval(createVegetable, 1000);
 });
