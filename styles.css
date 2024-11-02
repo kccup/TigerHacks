@@ -81,8 +81,9 @@ body {
 }
 
 body {
-    cursor: url('shovel.png'), auto;
+    cursor: url('shovel.png') 32 32, auto;
 }
+
 .btn {
-    cursor: url('shovel.png'), auto;
+    cursor: url('shovel.png') 32 32, auto;
 }
