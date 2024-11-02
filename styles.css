@@ -4,6 +4,38 @@ body {
     color: #333;
     text-align: center;
     padding: 50px;
+
+    margin: 0;
+    height: 100vh; /* Full height of the viewport */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(
+      90deg,
+      #ff0000 16.66%,
+      #ff7f00 16.66%,
+      #ff7f00 33.33%,
+      #ffff00 33.33%,
+      #ffff00 50%,
+      #00ff00 50%,
+      #00ff00 66.66%,
+      #0000ff 66.66%,
+      #0000ff 83.33%,
+      #4b0082 83.33%,
+      #4b0082 100%
+    );
+    background-size: 150% 100%; /* Adjust for pixelated look */
+    animation: move 5s linear infinite; /* Optional animation */
+  }
+  
+  /* Keyframes for the background animation */
+  @keyframes move {
+    0% {
+      background-position: 0% 0%;
+    }
+    100% {
+      background-position: 100% 0%;
+    }
 }
 
 h1 {
