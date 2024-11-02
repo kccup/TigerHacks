@@ -20,7 +20,32 @@ body {
     animation: rainbow 10s linear infinite; /* Scrolling animation */
     color: #ff6347; /* Default text color */
 }
+#falling-vegetables {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; /* Allow clicks to pass through */
+    overflow: hidden;
+    z-index: -1; /* Ensure it is behind other content */
+}
 
+.vegetable {
+    position: absolute;
+    width: 50px; /* Adjust size as needed */
+    height: 50px; /* Adjust size as needed */
+    animation: fall linear infinite;
+}
+
+@keyframes fall {
+    0% {
+        transform: translateY(-100%);
+    }
+    100% {
+        transform: translateY(100vh);
+    }
+}
 /* Scrolling animation */
 @keyframes rainbow {
     0% { background-position: 0% 0%; }
@@ -30,12 +55,17 @@ body {
 .rainbow-text {
     font-size: 3em;
     margin-bottom: 20px;
-    background: linear-gradient(45deg, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #9400d3);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    font-family: 'Pacifico', cursive;
+    color: #228B22; /* Optional: Change the text color to a leafy green */
+}
+/* Button styles */
+.button-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center the buttons horizontally */
+    margin-top: 20px; /* Add some space between the heading and the buttons */
 }
 
-/* Button styles */
 .btn {
     background-color: rgba(255, 255, 255, 0.2);
     border: none;
@@ -45,21 +75,43 @@ body {
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
-    margin: 4px 2px;
+    margin: 10px 0; /* Add some space between the buttons */
     cursor: pointer;
     transition: background-color 0.3s, transform 0.3s;
-    border-radius: 5px;
+    border-radius: 120px;
 }
-
 .rainbow-btn {
-    background: linear-gradient(45deg, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #9400d3);
+    background: linear-gradient(45deg, #8FBC8F, #556B2F); /* Earthy colors */
     background-size: 200% 200%;
-    animation: rainbow-btn 4s linear infinite;
+    transition: background 0.3s, box-shadow 0.3s;
+    position: relative;
+    overflow: hidden;
+}
+.rainbow-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('vine.png') no-repeat center center; /* Add your vine image */
+    background-size: cover;
+    opacity: 0;
+    transition: opacity 0.3s;
 }
 
-@keyframes rainbow-btn {
-    0% { background-position: 0% 50%; }
-    100% { background-position: 100% 50%; }
+.rainbow-btn:hover::before {
+    opacity: 1;
+    animation: vine-grow 1s forwards;
+}
+
+@keyframes vine-grow {
+    0% {
+        box-shadow: inset 0 0 0 0 green;
+    }
+    100% {
+        box-shadow: inset 0 0 0 10px green;
+    }
 }
 
 .btn:hover {
