@@ -1,99 +1,94 @@
-body {
-    
-    cursor: url(images/shovel.png) 32 32, auto; /* Set the cursor for the entire body */
-}
+document.addEventListener('DOMContentLoaded', function() {
+    const buttons = document.querySelectorAll('button');
+    buttons.forEach(button => {
+        button.addEventListener('click', function() {
+            alert('Button clicked!');
+        });
+    });
+});
 
-#falling-vegetables {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none; /* Allow clicks to pass through */
-    overflow: hidden;
-    z-index: -1; /* Ensure it is behind other content */
-}
 
-.vegetable {
-    position: absolute;
-    width: 50px; /* Adjust size as needed */
-    height: 50px; /* Adjust size as needed */
-    animation: fall linear infinite;
-}
 
-@keyframes fall {
-    0% {
-        transform: translateY(-100%);
+document.addEventListener('DOMContentLoaded', () => {
+    const container = document.getElementById('falling-vegetables');
+    const heading = document.getElementById('heading');
+    const vegetables = ['kelp.png', 'carrots.png', 'corn.png']; // Add your specific vegetable images here
+
+    function createVegetable() {
+        const vegetable = document.createElement('img');
+        vegetable.src = `images/${vegetables[Math.floor(Math.random() * vegetables.length)]}`;
+        vegetable.classList.add('vegetable');
+        vegetable.style.left = `${Math.random() * 100}vw`;
+        vegetable.style.top = `-50px`; // Start above the viewport
+        container.appendChild(vegetable);
+
+        let speed = Math.random() * 2 + 1; // Random speed between 1 and 3
+        let direction = 1; // 1 for down, -1 for up
+
+        function animate() {
+            const vegRect = vegetable.getBoundingClientRect();
+            const headingRect = heading.getBoundingClientRect();
+
+            // Check for collision with the heading
+            if (
+                vegRect.bottom > headingRect.top &&
+                vegRect.top < headingRect.bottom &&
+                vegRect.right > headingRect.left &&
+                vegRect.left < headingRect.right
+            ) {
+                direction = -1; // Reverse direction to simulate bounce
+            }
+
+            // Move the vegetable
+            vegetable.style.top = `${vegRect.top + speed * direction}px`;
+
+            // Remove the vegetable if it goes out of the viewport
+            if (vegRect.top > window.innerHeight || vegRect.bottom < 0) {
+                vegetable.remove();
+            } else {
+                requestAnimationFrame(animate);
+            }
+        }
+
+        requestAnimationFrame(animate);
     }
-    100% {
-        transform: translateY(100vh);
-    }
-}
-/* Scrolling animation */
-@keyframes rainbow {
-    0% { background-position: 0% 0%; }
-    100% { background-position: 100% 100%; }
-}
 
-.rainbow-text {
-    font-size: 3em;
-    margin-bottom: 20px;
-    font-family: 'Pacifico', cursive;
-    color: #228B22; 
-}
+    // Create a new vegetable every 500ms
+    setInterval(createVegetable, 500);
+});
 
-.button-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* Center the buttons horizontally */
-    margin-top: 20px; /* Add some space between the heading and the buttons */
-}
+document.getElementById("button").addEventListener('click',()=>{
+    let inputValue = document.getElementById('inputName').value 
+    let details = document.getElementById("details")
+    details.innerHTML = ""
+    fetch(`https:www.themealdb.com/api/json/v1/1/search.php?s=${inputValue}`)
+        .then(response => response.json())
+        .then(data=> {
+            const items = document.getElementById("items")
+            items.innerHTML = ""
+            if(data.meals == null){
+                document.getElementById("msg").style.display = "block"
+            }else{
+                document.getElementById("msg").style.display = "none"
+                data.meals.forEach(meal =>{
+                    itemDiv = document.createElement("div")
+                    itemDiv.className = "m-2 singleItem"
+                    itemDiv.setAttribute('onclick' , `details('${meal.idMeal}')`)
+                    let  itemInfo = `
+                    <div class="card " style="width: 12rem;">
+                        <img src="${meal.strMealThumb}" class="card-img-top" alt="...">
+                        <div class="card-body text-center">
+                            <h5 class="card-text">${meal.strMeal}</h5>
+                        </div>
+                    </div>
+                    `
+                    itemDiv.innerHTML = itemInfo
+                    items.appendChild(itemDiv)
+                })
+            }
 
-.btn {
-    cursor: url(images/shovel.png) 32 32, auto; /* Set the cursor for the buttons */
-    background-color: rgba(165, 10, 10, 0.2);
-    border: none;
-    color: white;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 10px 0; /* Add some space between the buttons */
-    transition: background-color 0.3s, transform 0.3s;
-    border-radius: 5px;
-    position: relative;
-    overflow: hidden;
-}
+        })
+})
 
-.btn:hover {
-    background-color: rgba(133, 43, 43, 0.5);
-    transform: scale(1.1);
-}
 
-.rainbow-btn {
-    background: linear-gradient(45deg, #8FBC8F, #93e9004f); /* Earthy colors */
-    background-size: 200% 200%;
-    transition: background 0.3s, box-shadow 0.3s;
-    position: relative;
-    overflow: hidden;
-}
-
-.rainbow-btn::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: url(images/vine.png) no-repeat center center; 
-    background-size: cover;
-    opacity: 0;
-    transition: opacity 0.3s;
-}
-
-.rainbow-btn:hover::before {
-    opacity: 1;
-    animation: vine-grow 1s forwards;
-}
 
