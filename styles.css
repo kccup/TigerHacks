@@ -80,3 +80,9 @@ body {
     display: inline-block;
 }
 
+body {
+    cursor: url('shovel.png'), auto;
+}
+.btn {
+    cursor: url('shovel.png'), auto;
+}
