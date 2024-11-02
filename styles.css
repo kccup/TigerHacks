@@ -1,34 +1,26 @@
 body {
-    
-    cursor: url(images/shovel.png) 32 32, auto; /* Set the cursor for the entire body */
+    margin: 0;
+    height: 100vh; /* Full height of the viewport */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff; /* Fallback color */
+    background-image: 
+      linear-gradient(
+        45deg,
+        #ff0000,
+        #ff7f00,
+        #ffff00,
+        #00ff00,
+        #0000ff,
+        #4b0082,
+        #9400d3
+      );
+    background-size: 400% 400%; /* Large size for pixelation effect */
+    animation: rainbow 10s linear infinite; /* Scrolling animation */
+    color: #ff6347; /* Default text color */
 }
 
-#falling-vegetables {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none; /* Allow clicks to pass through */
-    overflow: hidden;
-    z-index: -1; /* Ensure it is behind other content */
-}
-
-.vegetable {
-    position: absolute;
-    width: 50px; /* Adjust size as needed */
-    height: 50px; /* Adjust size as needed */
-    animation: fall linear infinite;
-}
-
-@keyframes fall {
-    0% {
-        transform: translateY(-100%);
-    }
-    100% {
-        transform: translateY(100vh);
-    }
-}
 /* Scrolling animation */
 @keyframes rainbow {
     0% { background-position: 0% 0%; }
@@ -38,20 +30,14 @@ body {
 .rainbow-text {
     font-size: 3em;
     margin-bottom: 20px;
-    font-family: 'Pacifico', cursive;
-    color: #228B22; 
+    background: linear-gradient(45deg, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #9400d3);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
-.button-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* Center the buttons horizontally */
-    margin-top: 20px; /* Add some space between the heading and the buttons */
-}
-
+/* Button styles */
 .btn {
-    cursor: url(images/shovel.png) 32 32, auto; /* Set the cursor for the buttons */
-    background-color: rgba(165, 10, 10, 0.2);
+    background-color: rgba(255, 255, 255, 0.2);
     border: none;
     color: white;
     padding: 15px 32px;
@@ -59,41 +45,45 @@ body {
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
-    margin: 10px 0; /* Add some space between the buttons */
+    margin: 4px 2px;
+    cursor: pointer;
     transition: background-color 0.3s, transform 0.3s;
     border-radius: 5px;
-    position: relative;
-    overflow: hidden;
-}
-
-.btn:hover {
-    background-color: rgba(133, 43, 43, 0.5);
-    transform: scale(1.1);
 }
 
 .rainbow-btn {
-    background: linear-gradient(45deg, #8FBC8F, #93e9004f); /* Earthy colors */
+    background: linear-gradient(45deg, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #9400d3);
     background-size: 200% 200%;
-    transition: background 0.3s, box-shadow 0.3s;
-    position: relative;
-    overflow: hidden;
+    animation: rainbow-btn 4s linear infinite;
 }
 
-.rainbow-btn::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: url(images/vine.png) no-repeat center center; 
-    background-size: cover;
-    opacity: 0;
-    transition: opacity 0.3s;
+@keyframes rainbow-btn {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 100% 50%; }
 }
 
-.rainbow-btn:hover::before {
-    opacity: 1;
-    animation: vine-grow 1s forwards;
+.btn:hover {
+    transform: scale(1.1);
 }
 
+/* Additional button hover effects */
+.btn:hover {
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
+/* Pixelated grid effect */
+.pixel {
+    width: 10px; /* Width of each pixel */
+    height: 10px; /* Height of each pixel */
+    background: rgba(255, 255, 255, 0.2); /* Optional overlay for a pixelated look */
+    box-shadow: 0 0 0 1px #fff; /* Outline to enhance pixel effect */
+    display: inline-block;
+}
+
+body {
+    cursor: url('shovel.png') 32 32, auto;
+}
+
+.btn {
+    cursor: url('shovel.png') 32 32, auto;
+}
