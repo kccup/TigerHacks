@@ -51,7 +51,15 @@ body {
 }
 /* Scrolling animation */
 @keyframes rainbow {
-    0% { bac#228B22; 
+    0% { background-position: 0% 0%; }
+    100% { background-position: 100% 100%; }
+}
+
+.rainbow-text {
+    font-size: 3em;
+    margin-bottom: 20px;
+    font-family: 'Pacifico', cursive;
+    color: #228B22; 
 }
 
 .button-container {
@@ -108,19 +116,6 @@ body {
     opacity: 1;
     animation: vine-grow 1s forwards;
 }
-
-kground-position: 0% 0%; }
-    100% { background-position: 100% 100%; }
-}
-
-.rainbow-text {
-    font-size: 3em;
-    margin-bottom: 20px;
-    font-family: 'Pacifico', cursive;
-    color: 
-
-
-
 
 
 
