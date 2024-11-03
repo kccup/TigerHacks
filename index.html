@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OrgChoices</title>
-   
+
     <link rel="stylesheet" href="styles.css">
     <link rel="icon" href="favicon.ico" type="image/x-icon">
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
@@ -13,21 +13,23 @@
 </head>
 <body>
     <h1 class="rainbow-text" id="heading">Welcome to Your OrgChoices</h1>
-    
+
     <!-- Search Bar -->
     <div class="container mt-4">
         <input type="text" id="mealSearch" class="form-control" placeholder="Search for a meal...">
         <button id="searchButton" class="btn btn-primary mt-2">Search</button>
     </div>
-    
-    <div id="mealResults" class="mt-4"></div>
+
+    <div id="mealResults" class="mt-4">
+        <div id="items" class="mt-4"></div>
+        <div id="msg" style="display: none;">No meals found. Try searching for soups or guisados!</div>
+    </div>
 
     <div class="button-container">
         <button class="btn rainbow-btn">Help</button>
     </div>
     <div id="falling-vegetables"></div>
-    
-    <script src="scripts.js"></script>
 
+    <script src="scripts.js"></script>
 </body>
 </html>
