@@ -7,12 +7,10 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-
-
 document.addEventListener('DOMContentLoaded', () => {
     const container = document.getElementById('falling-vegetables');
     const heading = document.getElementById('heading');
-    const vegetables = ['kelp.png', 'carrots.png', 'corn.png']; // Add your specific vegetable images here
+    const vegetables = ['kelp.png', 'carrots.png', 'corn.png']; // Add specific vegetable images here
 
     function createVegetable() {
         const vegetable = document.createElement('img');
@@ -57,38 +55,43 @@ document.addEventListener('DOMContentLoaded', () => {
     setInterval(createVegetable, 500);
 });
 
-document.getElementById("button").addEventListener('click',()=>{
-    let inputValue = document.getElementById('inputName').value 
-    let details = document.getElementById("details")
-    details.innerHTML = ""
-    fetch(`https:www.themealdb.com/api/json/v1/1/search.php?s=${inputValue}`)
-        .then(response => response.json())
-        .then(data=> {
-            const items = document.getElementById("items")
-            items.innerHTML = ""
-            if(data.meals == null){
-                document.getElementById("msg").style.display = "block"
-            }else{
-                document.getElementById("msg").style.display = "none"
-                data.meals.forEach(meal =>{
-                    itemDiv = document.createElement("div")
-                    itemDiv.className = "m-2 singleItem"
-                    itemDiv.setAttribute('onclick' , `details('${meal.idMeal}')`)
-                    let  itemInfo = `
-                    <div class="card " style="width: 12rem;">
-                        <img src="${meal.strMealThumb}" class="card-img-top" alt="...">
-                        <div class="card-body text-center">
-                            <h5 class="card-text">${meal.strMeal}</h5>
-                        </div>
-                    </div>
-                    `
-                    itemDiv.innerHTML = itemInfo
-                    items.appendChild(itemDiv)
-                })
-            }
+document.getElementById('searchButton').addEventListener('click', async () => {
+    const query = document.getElementById('mealSearch').value;
+    
+    // Check if the query is not empty
+    if (!query) {
+        alert('Please enter a meal to search for.');
+        return;
+    }
 
-        })
-})
+    // Fetch data from the backend
+    const response = await fetch(`http://localhost:3000/api/search?query=${query}`);
+    const data = await response.json();
+    
+    // Display results
+    const mealResults = document.getElementById('mealResults');
+    mealResults.innerHTML = ''; // Clear previous results
+
+    if (data.meals) {
+        data.meals.forEach(meal => {
+            const mealElement = document.createElement('div');
+            mealElement.classList.add('meal', 'border', 'rounded', 'p-3', 'mb-3'); // Add Bootstrap classes for styling
+
+            mealElement.innerHTML = `
+                <h3>${meal.strMeal}</h3>
+                <img src="${meal.strMealThumb}" alt="${meal.strMeal}" class="img-fluid">
+                <p><strong>Category:</strong> ${meal.strCategory}</p>
+                <p><strong>Area:</strong> ${meal.strArea}</p>
+                <p><strong>Instructions:</strong> ${meal.strInstructions}</p>
+                <a href="${meal.strYoutube}" target="_blank" class="btn btn-success">Watch on YouTube</a>
+            `;
+            mealResults.appendChild(mealElement);
+        });
+    } else {
+        mealResults.innerHTML = '<p>No results found. Try another search term.</p>';
+    }
+});
+
 
 
 
